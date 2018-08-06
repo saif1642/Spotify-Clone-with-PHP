@@ -1,20 +1,9 @@
-<?php
-
-    if(isset($_POST['loginButton'])){
-		//Login button pressed
-		echo "Login button has pressed";
-	}
-	if(isset($_POST['registerButton'])){
-		//Register button pressed
-		echo "Register button has pressed";
-	}
-
+<?php 
+   include("inc/classes/Account.php");
+   $account = new Account();
+   include("inc/handlers/register-handler.php");
+   include("inc/handlers/login-handler.php");
 ?>
-
-
-
-
-
 <html>
 <head>
 	<title>Welcome to Slotify!</title>
