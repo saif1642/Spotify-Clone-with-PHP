@@ -29,7 +29,11 @@
 		$password = sanitizeFormPassword($_POST['password']);
 		$c_password = sanitizeFormPassword($_POST['c_password']);
 
-		$account->register($username,$firstname,$lastname,$email,$c_email,$password,$c_password);
+		$successfulReg = $account->register($username,$firstname,$lastname,$email,$c_email,$password,$c_password);
+
+		if($successfulReg){
+			header("Location: index.php");
+		}
 
 	}
 
