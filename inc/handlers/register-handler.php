@@ -32,6 +32,7 @@
 		$successfulReg = $account->register($username,$firstname,$lastname,$email,$c_email,$password,$c_password);
 
 		if($successfulReg){
+			$_SESSION['userLoggedIn'] = $username;
 			header("Location: index.php");
 		}
 
