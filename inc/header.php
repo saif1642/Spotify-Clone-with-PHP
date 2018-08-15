@@ -2,7 +2,8 @@
 
    include("inc/config.php");
    include('inc/classes/Artist.php');
-   include('inc/classes/Album.php');  
+   include('inc/classes/Album.php');
+   include('inc/classes/Song.php');   
    //session_destroy();  //Logout Manually
    if(isset($_SESSION['userLoggedIn'])){
    	$userLoggedIn = $_SESSION['userLoggedIn'];
