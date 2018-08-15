@@ -8,7 +8,18 @@
 ?>
 
 <script>
-    console.log(<?php echo $jsonArray ?>);
+    $(document).ready(function(){
+        currentPlayList = <?php echo $jsonArray; ?>;
+        audioElement = new Audio();
+        setTrack(currentPlayList[0],currentPlayList,true);
+    });
+    function setTrack(trackId,newPlayList,play){
+        audioElement.setTrack("assets/music/bensound-scifi.mp3");
+        if(play){
+            audioElement.play();
+        }
+        
+    }
 </script>
 
 <div id="nowPlayingBarContainer">

@@ -22,12 +22,6 @@
 </head>
 
 <body>
-	<script>
-	  let audioElement = new Audio();
-	  audioElement.getTrack("assets/music/bensound-epic.mp3");
-	  audioElement.audio.play();
-
-	</script>
 	<div id="mainContainer">
 		<div id="topContainer">
 		   <?php include('inc/navBarContainer.php'); ?>
