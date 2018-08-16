@@ -11,7 +11,7 @@
     $(document).ready(function(){
         currentPlayList = <?php echo $jsonArray; ?>;
         audioElement = new Audio();
-        setTrack(currentPlayList[0],currentPlayList,true);
+        setTrack(currentPlayList[0],currentPlayList,false);
     });
     function setTrack(trackId,newPlayList,play){
         audioElement.setTrack("assets/music/bensound-scifi.mp3");
@@ -19,6 +19,16 @@
             audioElement.play();
         }
         
+    }
+    function playSong(){
+        $(".controlButton.play").hide();
+        $(".controlButton.pause").show();
+        audioElement.play();
+    }
+    function pauseSong(){
+        $(".controlButton.play").show();
+        $(".controlButton.pause").hide();
+        audioElement.pause();
     }
 </script>
 
@@ -48,14 +58,14 @@
                     <button class="controlButton previous" title="Previous Button">
                         <img src="assets/images/icons/previous.png" alt="previous">
                     </button>
-                    <button class="controlButton play" title="Play Button">
+                    <button class="controlButton play" title="Play Button" onClick="playSong()">
                         <img src="assets/images/icons/play.png" alt="play">
+                    </button>
+                    <button class="controlButton pause" title="Pause Button" style="display: none;" onClick="pauseSong()">
+                        <img src="assets/images/icons/pause.png" alt="pause">
                     </button>
                     <button class="controlButton next" title="Next Button">
                         <img src="assets/images/icons/next.png" alt="next">
-                    </button>
-                    <button class="controlButton pause" title="Pause Button" style="display: none;">
-                        <img src="assets/images/icons/pause.png" alt="pause">
                     </button>
                     <button class="controlButton repeat" title="Repeat Button">
                         <img src="assets/images/icons/repeat.png" alt="repeat">
