@@ -23,15 +23,25 @@
              let artist = JSON.parse(data);
              $(".artistName span").text(artist.name);
             });
-            audioElement.setTrack(track.path);
+            $.post("inc/handlers/ajax/getAlbumJson.php",{albumId : track.album}, function(data){
+             let album = JSON.parse(data);
+             $(".albumLink img").attr("src",album.artworkPath);
+            });
+            audioElement.setTrack(track);
             if(play){
-            audioElement.play();
+               playSong();
             }
         });
         
         
     }
     function playSong(){
+        audioElement.play();
+        if(audioElement.audio.currentTime == 0){
+            $.post("inc/handlers/ajax/updatePlaysJson.php",{songId : audioElement.currentlyPlaying.id});
+        }
+           
+
         $(".controlButton.play").hide();
         $(".controlButton.pause").show();
         audioElement.play();
