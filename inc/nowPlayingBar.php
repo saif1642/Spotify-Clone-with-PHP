@@ -14,10 +14,21 @@
         setTrack(currentPlayList[0],currentPlayList,false);
     });
     function setTrack(trackId,newPlayList,play){
-        audioElement.setTrack("assets/music/bensound-scifi.mp3");
-        if(play){
+        //Ajax Req to get Song
+        $.post("inc/handlers/ajax/getSongsJson.php",{songId : trackId}, function(data){
+            let track = JSON.parse(data);
+            $(".trackName span").text(track.title);
+            //Ajax Req to get Artist
+            $.post("inc/handlers/ajax/getArtistJson.php",{artistId : track.artist}, function(data){
+             let artist = JSON.parse(data);
+             $(".artistName span").text(artist.name);
+            });
+            audioElement.setTrack(track.path);
+            if(play){
             audioElement.play();
-        }
+            }
+        });
+        
         
     }
     function playSong(){
@@ -41,10 +52,10 @@
             </span>
             <div class="trackInfo">
                 <span class="trackName">
-                    <span>Bioscope</span>
+                    <span></span>
                 </span>
                 <span class="artistName">
-                    <span>Sanjeeb Chowdoury</span> 
+                    <span></span> 
                 </span>
             </div>
             </div>
