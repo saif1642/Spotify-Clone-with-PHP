@@ -11,8 +11,11 @@
     $(document).ready(function(){
         currentPlayList = <?php echo $jsonArray; ?>;
         audioElement = new Audio();
+        updateProgressBarVolume(audioElement.audio); 
         setTrack(currentPlayList[0],currentPlayList,false);
-
+        $("#nowPlayingBarContainer").on("mousedown touchstart mousemove touchmove",function(e){
+            e.preventDefault();
+        });
         //Music player control Bar
         $("#playbackBar .progressBar").mousedown(function(){
             mouseDown = true;

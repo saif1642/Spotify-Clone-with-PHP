@@ -22,16 +22,25 @@ function updateProgressBarTime(audio){
     $("#playbackBar .progress").css("width",progress+"%");
 
 }
+function updateProgressBarVolume(audio){
+    var volume = audio.volume*100;
+    console.log(volume);
+    $(".volumeBar .progress").css("width",volume+"%");
+
+}
 function Audio(){
     this.currentlyPlaying;
     this.audio = document.createElement('audio');
     this.audio.addEventListener("canplay",function(){
-        $(".progressTime.remaining").text(formatTime(this.duration));      
+        $(".progressTime.remaining").text(formatTime(this.duration));     
     });
     this.audio.addEventListener("timeupdate",function(){
            if(this.duration){
                updateProgressBarTime(this);
            }
+    });
+    this.audio.addEventListener("volumechange",function(){
+        updateProgressBarVolume(this);
     });
     this.setTrack = function(track){
         this.currentlyPlaying = track;
