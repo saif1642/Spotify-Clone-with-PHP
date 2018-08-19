@@ -1,4 +1,5 @@
 var currentPlayList = [];
+var currentIndex = 0;
 var audioElement;
 var mouseDown = false;
 function formatTime(seconds){

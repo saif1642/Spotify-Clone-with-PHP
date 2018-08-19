@@ -58,10 +58,20 @@
         var seconds = audioElement.audio.duration*(percentage/100);
         audioElement.setTime(seconds);
     }
+    function nextSong(){
+        if(currentIndex === currentIndex - 1){
+            currentIndex = 0;
+        }else{
+            currentIndex++;
+        }
+        var playTrack = currentPlayList[currentIndex];
+        setTrack(playTrack,currentPlayList,true);
+    }
     function setTrack(trackId,newPlayList,play){
         //Ajax Req to get Song
         $.post("inc/handlers/ajax/getSongsJson.php",{songId : trackId}, function(data){
             let track = JSON.parse(data);
+            currentIndex = currentPlayList.indexOf(trackId);
             $(".trackName span").text(track.title);
             //Ajax Req to get Artist
             $.post("inc/handlers/ajax/getArtistJson.php",{artistId : track.artist}, function(data){
@@ -131,7 +141,7 @@
                     <button class="controlButton pause" title="Pause Button" style="display: none;" onClick="pauseSong()">
                         <img src="assets/images/icons/pause.png" alt="pause">
                     </button>
-                    <button class="controlButton next" title="Next Button">
+                    <button class="controlButton next" title="Next Button" onclick="nextSong()">
                         <img src="assets/images/icons/next.png" alt="next">
                     </button>
                     <button class="controlButton repeat" title="Repeat Button">
