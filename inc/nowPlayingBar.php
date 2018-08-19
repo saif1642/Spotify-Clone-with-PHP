@@ -17,15 +17,15 @@
             e.preventDefault();
         });
         //Music player control Bar
-        $("#playbackBar .progressBar").mousedown(function(){
+        $(".playbackBar .progressBar").mousedown(function(){
             mouseDown = true;
         });
-        $("#playbackBar .progressBar").mousemove(function(e){
+        $(".playbackBar .progressBar").mousemove(function(e){
             if(mouseDown){
                 timeFromOffset(e,this);
             }
         });
-        $("#playbackBar .progressBar").mouseup(function(e){
+        $(".playbackBar .progressBar").mouseup(function(e){
                 timeFromOffset(e,this);
         });
 
@@ -57,6 +57,14 @@
         var percentage = (mouse.offsetX / $(this).width())*100;
         var seconds = audioElement.audio.duration*(percentage/100);
         audioElement.setTime(seconds);
+    }
+    function prevSong(){
+        if(audioElement.audio.currentTime >= 3 || currentIndex == 0){
+            audioElement.setTime(0);
+        }else{
+            currentIndex--;
+            setTrack(currentPlayList[currentIndex],currentPlayList,true);
+        }
     }
     function nextSong(){
         if(repeat){
@@ -143,7 +151,7 @@
                     <button class="controlButton shuffle" title="Shuffle Button">
                         <img src="assets/images/icons/shuffle.png" alt="shuffle">
                     </button>
-                    <button class="controlButton previous" title="Previous Button">
+                    <button class="controlButton previous" title="Previous Button" onClick="prevSong()">
                         <img src="assets/images/icons/previous.png" alt="previous">
                     </button>
                     <button class="controlButton play" title="Play Button" onClick="playSong()">
@@ -159,11 +167,11 @@
                         <img src="assets/images/icons/repeat.png" alt="repeat">
                     </button>
                 </div>
-                <div id="playbackBar">
+                <div class="playbackBar">
                     <span class="progressTime current">0.00</span>
                     <div class="progressBar">
                         <div class="progressBarBg">
-                            <div class="progress" style="padding: 1px; background-color: #a0a0a0;"></div>
+                            <div class="progress"></div>
                         </div>
                     </div>
                     <span class="progressTime remaining">0.00</span>

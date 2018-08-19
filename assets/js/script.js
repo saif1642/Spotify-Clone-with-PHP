@@ -21,7 +21,7 @@ function updateProgressBarTime(audio){
     $(".progressTime.current").text(formatTime(audio.currentTime));
     $(".progressTime.remaining").text(formatTime(audio.duration - audio.currentTime)); 
     var progress = (audio.currentTime / audio.duration)*100;
-    $("#playbackBar .progress").css("width",progress+"%");
+    $(".playbackBar .progress").css("width",progress+"%");
 
 }
 function updateProgressBarVolume(audio){
@@ -33,6 +33,9 @@ function updateProgressBarVolume(audio){
 function Audio(){
     this.currentlyPlaying;
     this.audio = document.createElement('audio');
+    this.audio.addEventListener("ended",function(){
+        nextSong();
+    });
     this.audio.addEventListener("canplay",function(){
         $(".progressTime.remaining").text(formatTime(this.duration));     
     });
