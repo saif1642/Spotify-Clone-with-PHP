@@ -85,6 +85,11 @@
         var imageName = repeat ? "repeat-active.png":"repeat.png";
         $(".controlButton.repeat img").attr("src","assets/images/icons/"+imageName);
     }
+    function setMute(){
+        audioElement.audio.muted = !audioElement.audio.muted;
+        var imageName = audioElement.audio.muted ? "volume-mute.png":"volume.png";
+        $(".controlButton.volume img").attr("src","assets/images/icons/"+imageName);
+    }
     function setTrack(trackId,newPlayList,play){
         currentIndex = currentPlayList.indexOf(trackId);
         pauseSong();
@@ -180,8 +185,8 @@
         </div>
         <div id="nowPlayingRight">
             <div class="volumeBar">
-                <button class="controlButton volume" title="Volume control">
-                    <img src="assets/images/icons/volume.png" alt="repeat">
+                <button class="controlButton volume" title="Volume control" onClick="setMute()">
+                    <img src="assets/images/icons/volume.png" alt="volume">
                 </button>
                 <div class="progressBar">
                     <div class="progressBarBg">
