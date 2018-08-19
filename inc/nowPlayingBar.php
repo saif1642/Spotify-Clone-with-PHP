@@ -59,6 +59,11 @@
         audioElement.setTime(seconds);
     }
     function nextSong(){
+        if(repeat){
+            audioElement.setTime(0);
+            playSong();
+            return;
+        }
         if(currentIndex === currentIndex - 1){
             currentIndex = 0;
         }else{
@@ -67,11 +72,17 @@
         var playTrack = currentPlayList[currentIndex];
         setTrack(playTrack,currentPlayList,true);
     }
+    function setRepeat(){
+        repeat = !repeat;
+        var imageName = repeat ? "repeat-active.png":"repeat.png";
+        $(".controlButton.repeat img").attr("src","assets/images/icons/"+imageName);
+    }
     function setTrack(trackId,newPlayList,play){
+        currentIndex = currentPlayList.indexOf(trackId);
+        pauseSong();
         //Ajax Req to get Song
         $.post("inc/handlers/ajax/getSongsJson.php",{songId : trackId}, function(data){
             let track = JSON.parse(data);
-            currentIndex = currentPlayList.indexOf(trackId);
             $(".trackName span").text(track.title);
             //Ajax Req to get Artist
             $.post("inc/handlers/ajax/getArtistJson.php",{artistId : track.artist}, function(data){
@@ -144,7 +155,7 @@
                     <button class="controlButton next" title="Next Button" onclick="nextSong()">
                         <img src="assets/images/icons/next.png" alt="next">
                     </button>
-                    <button class="controlButton repeat" title="Repeat Button">
+                    <button class="controlButton repeat" title="Repeat Button" onClick="setRepeat()">
                         <img src="assets/images/icons/repeat.png" alt="repeat">
                     </button>
                 </div>
