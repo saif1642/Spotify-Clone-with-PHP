@@ -27,7 +27,9 @@
             $this->path = $this->mysqliData['path'];
 
         }
-
+        public function getID(){
+            return $this->id;
+        }
         public function getTitle(){
             return $this->title;
         }
